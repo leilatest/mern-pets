@@ -5,8 +5,9 @@
   "server": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "node index.js",
     "dev": "nodemon server.js",
+    "server": "nodemon index.js --ignore client",
     "client": "cd client && npm start",
     "mern": "concurrently \"npm run dev\" \"npm run client\""
   },

@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     if (testuser) {
       return res.status(400).json({
         status: false,
-        error: "E-mail or Phone number already exist , please try another one",
+        error: "Email or Phone Number already exist , please try another one",
       });
     }
     let salt = await bcrypt.genSalt(10);

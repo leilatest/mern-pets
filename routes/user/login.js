@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     if (!User) {
       return res.status(400).json({
         status: false,
-        message: "Wrong Email or Password, please try again",
+        message: "Wrong E-mail or Password, please try again",
       });
     }
     let testPassword = await bcrypt.compare(password, User.password);
