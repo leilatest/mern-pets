@@ -38,7 +38,7 @@ const userSchema = new Schema({
   userImg: {
     type: String,
     default:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/User.svg/2048px-User.svg.png",
+      "https://www.iconpacks.net/icons/1/free-user-group-icon-296-thumb.png",
   },
   isUser: {
     type: Boolean,

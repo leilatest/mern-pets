@@ -19,15 +19,24 @@ function Login() {
     axios
       .post("/api/myapp/login", LoginData)
       .then((res) => {
-        setLoading(false);
-        navigate("/home");
-        console.log(res);
+        if(res.data.status){
+          setLoading(false);
+          localStorage.setItem("id", res.data.id);
+          localStorage.setItem("isUser", res.data.isUser);
+          localStorage.setItem("isAdmin", res.data.isAdmin);
+          localStorage.setItem("token", res.data.token);
+          console.log(res);
+
+          navigate(`/profile/${res.data.id}`);
+        }
       })
       .catch((err) => {
-        setLoading(false);
-        setErrorMsg(err.response.data.message);
-        setErrorTime(true);
-        console.dir(err);
+        if (err.response.data.message) {
+          setLoading(false);
+          setErrorMsg(err.response.data.message);
+          setErrorTime(true);
+          console.dir(err);
+        }
       });
   };
   useEffect(() => {
@@ -88,7 +97,7 @@ function Login() {
             }}
           />
         </Form>
-        {errorTime && errorMsg.includes("E-mail") && (
+        {errorTime && errorMsg.includes("Wrong") && (
           <Message error header="Ouups!🤕" content={errorMsg} />
         )}
       </div>

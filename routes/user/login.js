@@ -22,10 +22,10 @@ module.exports = async (req, res) => {
     }
     let token = await jwt.sign(
       {
-        id: User._id,
-        email: User.email,
-        isUser: User.isUser,
-        isAdmin: User.isAdmin,
+        id: user._id,
+        email:user.email,
+        isUser: user.isUser,
+        isAdmin: user.isAdmin,
       },
       process.env.KEY,
       { expiresIn: "1d" }
@@ -34,6 +34,9 @@ module.exports = async (req, res) => {
       status: true,
       message: "Your are logging in successfully",
       token,
+      id: User._id,
+      isUser: User.isUser,
+      isAdmin: User.isAdmin,
     });
   } catch (error) {
     if (error) throw error;

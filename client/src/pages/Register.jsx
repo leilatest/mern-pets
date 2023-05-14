@@ -20,7 +20,7 @@ function Register() {
     axios
       .post("/api/myapp/register", newUser)
       .then((res) => {
-        navigate("/Profile");
+        navigate("/profile");
       })
       .catch((err) => {
         setLoading(false);
