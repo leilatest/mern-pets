@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
     await newPet.save();
     res.status(200).json({
       status: true,
-      message: "Your account has been created successfully",
+      message: "successfully",
     });
   } catch (error) {
     if (error.errors.petName) {

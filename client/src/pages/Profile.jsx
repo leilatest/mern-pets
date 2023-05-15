@@ -6,6 +6,7 @@ import { Card, Image } from "semantic-ui-react";
 import { FaAddressCard } from "react-icons/fa";
 import { AiFillPhone, AiOutlineMail } from "react-icons/ai";
 import PetsList from "../components/PetsList";
+import Post from "../components/Post";
 
 function Profile() {
   const [user, setUser] = useState({});
@@ -21,8 +22,8 @@ function Profile() {
   return (
     <div>
       <NavBar />
-      <div className="grid grid-cols-4 gap-1 grid-rows-1 min-h-[630px]  ">
-        <div className=" col-span-1 bg-slate-50   ">
+      <div className="grid grid-cols-8 gap-1 grid-rows-1 min-h-[630px]  ">
+        <div className=" col-span-2 bg-slate-50   ">
           <>
             <Card
               color="teal"
@@ -54,6 +55,7 @@ function Profile() {
             </Card>
           </>
         </div>
+        <Post/>
         <PetsList />
       </div>
     </div>
