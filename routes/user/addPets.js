@@ -1,16 +1,9 @@
 const pet = require("../../models/pet");
 module.exports = async (req, res) => {
   try {
-    let {
-      petName,
-      breed,
-      vaccination,
-      grooming,
-      veterinarian,
-      age,
-      petImg,
-      userId,
-    } = req.body;
+    let { userId } = req.params;
+    let { petName, breed, vaccination, grooming, veterinarian, age, petImg } =
+      req.body;
 
     let newPet = new pet({
       petName,
@@ -25,7 +18,7 @@ module.exports = async (req, res) => {
     await newPet.save();
     res.status(200).json({
       status: true,
-      message: "successfully",
+      message: " Your new Pet has been created successfully",
     });
   } catch (error) {
     if (error.errors.petName) {

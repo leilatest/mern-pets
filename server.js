@@ -11,6 +11,7 @@ mongoose
 
 app.use(express.json());
 app.use("/api/myapp", require("./routes/user"));
+app.use("/api/myapp/post", require("./routes/post"));
 
 const Port = 5000 || process.env.Port;
 app.listen(Port, (err) => {

@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { Button, Form, Message } from "semantic-ui-react";
+import {
+  Button,
+  Divider,
+  Form,
+  Grid,
+  Segment,
+  Message,
+} from "semantic-ui-react";
 import { useNavigate, Link } from "react-router-dom";
-
 import axios from "axios";
 
 function Register() {
@@ -20,7 +26,7 @@ function Register() {
     axios
       .post("/api/myapp/register", newUser)
       .then((res) => {
-        navigate("/profile");
+        navigate("/login");
       })
       .catch((err) => {
         setLoading(false);
@@ -31,89 +37,109 @@ function Register() {
   };
 
   return (
-    <div className="h-screen grid grid-cols-3 grid-rows-1 ">
-      <div>
+    <div className=" grid grid-cols-8 gap-4 bg-gradient-to-r from-orange-700 to-orange-300">
+      <div className="col-span-2">
         <img
-          className="bg-cover h-screen flex content-center object-cover "
+          className="bg-cover h-screen flex content-center object-cover	 "
           src={require("../image/pets1.png")}
           alt="pets"
         />
       </div>
 
-      <div className="bg-slate-50 col-span-2  m-auto w-full p-10">
-        <Form
-          className=" font-bold font-Glegoo"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-        >
-          <div className="mb-8">
-            <h5 className="inline font-bold font-Glegoo">
-              {" "}
-              You already have an account ?
-            </h5>{" "}
-            <Link
-              className=" font-bold font-Glegoo text-blue-600  visited:text-fuchsia-500	"
-              to="/login"
-            >
-              {" "}
-              Login now{" "}
-            </Link>
-          </div>
+      <div className="bg-gradient-to-r from-zinc-300   to-transparent  rounded-lg col-span-6   m-auto  p-5 w-2/3 ">
+        <Segment placeholder>
+          <Grid columns={2} relaxed="very" stackable>
+            <Grid.Column>
+              <Form
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+              >
+                {" "}
+                <div className="flex flex-row">
+                  <Form.Input
+                    type="radio"
+                    value="true"
+                    label="User"
+                    placeholder="user"
+                    name="isUser"
+                  />
+                  <Form.Input
+                    type="radio"
+                    value="true"
+                    label="Admin"
+                    placeholder="admin"
+                    name="isAdmin"
+                  />
+                </div>
+                <Form.Input
+                  icon="user"
+                  iconPosition="left"
+                  label="Name"
+                  placeholder="userName"
+                  name="userName"
+                  error={errorMsg.includes("UserName") && errorMsg}
+                />
+                <Form.Input
+                  icon="mail"
+                  iconPosition="left"
+                  label="email"
+                  placeholder="email"
+                  name="email"
+                  error={errorMsg.includes("e-mail") && errorMsg}
+                />
+                <Form.Input
+                  icon="lock"
+                  iconPosition="left"
+                  label="password"
+                  placeholder="password"
+                  name="password"
+                  type="password"
+                  error={errorMsg.includes("password") && errorMsg}
+                />
+                <Form.Input
+                  icon="phone"
+                  iconPosition="left"
+                  label="phone"
+                  placeholder="phone"
+                  name="phone"
+                  error={errorMsg.includes("phone") && errorMsg}
+                />
+                <Form.Input
+                  icon="address card"
+                  iconPosition="left"
+                  label="address"
+                  placeholder="address"
+                  name="address"
+                  error={errorMsg.includes("address") && errorMsg}
+                />
+                <Form.Input
+                  icon="picture"
+                  iconPosition="left"
+                  label="image"
+                  type="text"
+                  name="userImg"
+                />
+                <Button
+                  content="Save"
+                  primary
+                  loading={loading}
+                  onClick={() => {
+                    handleRegister();
+                  }}
+                />
+              </Form>
+            </Grid.Column>
 
-          <Form.Group unstackable widths={3}>
-            <Form.Input
-              label="Username"
-              placeholder="Username"
-              name="userName"
-              error={errorMsg.includes("UserName") && errorMsg}
-            />
-            <Form.Input
-              label="Email"
-              type="email"
-              placeholder="ex:example@ex.com"
-              name="email"
-              error={errorMsg.includes("e-mail") && errorMsg}
-            />
-            <Form.Input
-              label="Password"
-              type="password"
-              placeholder="password"
-              name="password"
-              error={errorMsg.includes("password") && errorMsg}
-            />
-          </Form.Group>
-          <Form.Group widths={3}>
-            <Form.Input
-              label="Phone"
-              placeholder="Phone"
-              name="phone"
-              error={errorMsg.includes("phone") && errorMsg}
-            />
-            <Form.Input
-              label="Address"
-              placeholder="address"
-              name="address"
-              error={errorMsg.includes("address") && errorMsg}
-            />
-            <Form.Input
-              label="Profile Picture"
-              type="text"
-              placeholder="Profile Picture"
-              name="userImg"
-            />
-          </Form.Group>
+            <Grid.Column verticalAlign="middle">
+              <Link to="/login">
+                <Button content="Login now " icon="signup" size="big" />
+              </Link>
+            </Grid.Column>
+          </Grid>
 
-          <Button
-            basic
-            color="grey"
-            content="Save"
-            loading={loading}
-            onClick={() => {
-              handleRegister();
-            }}
-          />
-        </Form>
+          <Divider vertical>Or</Divider>
+        </Segment>
         {errorMsg.includes("Email") && (
           <Message error header="Ouups!🤕" content={errorMsg} />
         )}

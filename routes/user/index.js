@@ -9,6 +9,10 @@ router.post("/addpets/:userId", require("./addPets"));
 
 router.get("/:id", require("./getOwnProfile"));
 router.get("/pets/:userId", require("./getPets"));
+router.get("/ListPosts/:userId", require("./listPosts"));
+router.get("/ListUsers/:userId", require("./listUsers"));
+router.get("/getTPets/:id", require("./getTPets"));
+router.get("/getPostsVisitor/:id", require("./getPostsVisitor"));
 
 router.put("/updatePet/:id", require("./updatePet"));
 

@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
-import {
-  Button,
-  Card,
-  Form,
-  Image,
-  Input,
-  Modal,
-  Message,
-} from "semantic-ui-react";
+import { Button, Card, Form, Image, Input } from "semantic-ui-react";
 import { ToastContainer, toast } from "react-toastify";
 
 function PetsList() {
@@ -17,11 +9,7 @@ function PetsList() {
   const [showUpdate, setShowUpdate] = useState(false);
   const [petId, setPetId] = useState("");
   const [updatePet, setUpdatePet] = useState({});
-  const [open, setOpen] = React.useState(false);
   let { id } = useParams();
-  const [newPet, setNewPet] = useState({});
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [deletePet, setDeletePet] = useState(false);
 
   useEffect(() => {
@@ -60,26 +48,7 @@ function PetsList() {
       })
       .catch((err) => console.dir(err));
   };
-  const handleNewPet = (e) => {
-    setNewPet({ ...newPet, [e.target.name]: e.target.value });
-  };
 
-  const handleCreatePet = () => {
-    axios
-      .post(`/api/myapp/addPets/${id}`, newPet)
-      .then((res) => {
-        if (res) {
-          setSuccess(res.data.message);
-          setNewPet({});
-          console.log(res);
-        }
-      })
-      .catch((err) => {
-        if (err) {
-          setError(err.response.data.error);
-        }
-      });
-  };
   const handleDelete = (petId) => {
     axios
       .delete(`/api/myapp/deletePet/${petId}`)
@@ -103,13 +72,11 @@ function PetsList() {
   };
 
   return (
-    <div className="  col-span-2 bg-gray-100  ">
-      <Card.Group className="flex  items-center gap-[1px] py-3 px-5 ">
+    <div>
+      <Card.Group className="flex flex-col  items-center 	rounded-lg ">
         {pets.map((pet) => (
-          <Card key={pet._id}>
-            <Image className="h-64 object-cover" src={pet.petImg} />
-
-            <Card.Content>
+          <Card className=" absolute top-2 w-screen rounded-lg " key={pet._id}>
+            <Card.Content    >
               {showUpdate && petId === pet._id ? (
                 <Form
                   className="flex flex-col  justify-center"
@@ -117,6 +84,22 @@ function PetsList() {
                     handleChange(e);
                   }}
                 >
+                  <Input
+                    icon="paw"
+                    iconPosition="left"
+                    defaultValue={pet.petName}
+                    type="text"
+                    placeholder="petName"
+                    name="petName"
+                  />
+                  <Input
+                    icon="paw"
+                    iconPosition="left"
+                    defaultValue={pet.breed}
+                    type="text"
+                    placeholder="breed"
+                    name="breed"
+                  />
                   <Input
                     icon="paw"
                     iconPosition="left"
@@ -160,7 +143,9 @@ function PetsList() {
                   />
                 </Form>
               ) : (
-                <div className="flex flex-col ">
+                <div>
+                  <Image className="h-64 object-cover" src={pet.petImg} />
+
                   <Card.Header>{pet.petName}</Card.Header>
                   <Card.Meta>{pet.breed}</Card.Meta>
                   <Card.Description>
@@ -213,82 +198,6 @@ function PetsList() {
           </Card>
         ))}
       </Card.Group>
-
-      <>
-        <Modal
-          onClose={() => setOpen(false)}
-          onOpen={() => setOpen(true)}
-          open={open}
-          trigger={<Button>Add Pets </Button>}
-        >
-          <Modal.Content>
-            <Form
-              className="flex flex-col"
-              onChange={(e) => {
-                handleNewPet(e);
-              }}
-            >
-              <Form.Group>
-                <Form.Input
-                  label="petName"
-                  placeholder="petName"
-                  name="petName"
-                  value={newPet.petName}
-                />
-                <Form.Input
-                  label="breed"
-                  placeholder="breed"
-                  name="breed"
-                  value={newPet.breed}
-                />
-                <Form.Input
-                  label="vaccination"
-                  placeholder="vaccination"
-                  name="vaccination"
-                  value={newPet.vaccination}
-                />
-                <Form.Input
-                  label="grooming"
-                  placeholder="grooming"
-                  name="grooming"
-                  value={newPet.grooming}
-                />
-                <Form.Input
-                  label="veterinarian"
-                  placeholder="veterinarian"
-                  name="veterinarian"
-                  value={newPet.veterinarian}
-                />
-                <Form.Input
-                  label="age"
-                  placeholder="age"
-                  name="age"
-                  value={newPet.age}
-                />
-                <Form.Input
-                  label="petImg"
-                  placeholder="petImg"
-                  name="petImg"
-                  value={newPet.petImg}
-                />
-              </Form.Group>
-            </Form>
-          </Modal.Content>
-
-          <Modal.Actions>
-            <Button
-              secondary
-              content="Save"
-              onClick={() => {
-                handleCreatePet();
-              }}
-            />
-            {error && <Message error header="Ouups!🤕" content={error} />}
-            {success && <Message positive header="success" content={success} />}
-          </Modal.Actions>
-        </Modal>
-      </>
-
       <>
         <ToastContainer
           position="bottom-center"

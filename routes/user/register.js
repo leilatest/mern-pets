@@ -3,7 +3,16 @@ const bcrypt = require("bcrypt");
 
 module.exports = async (req, res) => {
   try {
-    let { userName, email, password, phone, address, userImg } = req.body;
+    let {
+      userName,
+      email,
+      password,
+      phone,
+      address,
+      userImg,
+      isUser,
+      isAdmin,
+    } = req.body;
     let testuser = await user.findOne({ email, phone });
     if (testuser) {
       return res.status(400).json({
@@ -21,6 +30,8 @@ module.exports = async (req, res) => {
       phone,
       address,
       userImg,
+      isUser,
+      isAdmin,
     });
     await newUser.save();
     res.status(200).json({

@@ -1,12 +1,12 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import NavBar from "../components/NavBar";
 import axios from "axios";
-import { Card, Image } from "semantic-ui-react";
-import { FaAddressCard } from "react-icons/fa";
-import { AiFillPhone, AiOutlineMail } from "react-icons/ai";
+
 import PetsList from "../components/PetsList";
 import Post from "../components/Post";
+import AddPet from "../components/AddPet";
 
 function Profile() {
   const [user, setUser] = useState({});
@@ -20,45 +20,41 @@ function Profile() {
   }, [user, id]);
 
   return (
-    <div>
+    <>
       <NavBar />
-      <div className="grid grid-cols-8 gap-1 grid-rows-1 min-h-[630px]  ">
-        <div className=" col-span-2 bg-slate-50   ">
-          <>
-            <Card
-              color="teal"
-              key={user._id}
-              className=" absolute left-10 top-12 "
-            >
-              <Image src={user.userImg} />
-
-              <Card.Content>
-                <Card.Header>{user.userName}</Card.Header>{" "}
-              </Card.Content>
-              <Card.Content extra>
-                <Card.Meta className="flex row-reverse items-center gap-[6px]  ">
-                  {" "}
-                  <FaAddressCard />
-                  {user.address}
-                </Card.Meta>
-                <Card.Meta className="flex row-reverse items-center gap-[6px] ">
-                  {" "}
-                  <AiFillPhone />
-                  {user.phone}
-                </Card.Meta>
-                <Card.Meta className="flex row-reverse items-center gap-[6px] ">
-                  {" "}
-                  <AiOutlineMail />
-                  {user.email}
-                </Card.Meta>
-              </Card.Content>
-            </Card>
-          </>
+      <div className=" grid grid-cols-8 gap-5 mr-2 ml-2 mt-2 h-screen bg-neutral-50 ">
+        <div className=" col-span-2   ">
+          <div
+            key={user._id}
+            className="bg-gradient-to-r from-zinc-200 to-zinc-300 h-40 w-[23rem] mt-4  rounded-full flex flex-row justify-evenly 	items-center		 "
+          >
+            <img
+              className=" w-[7rem] rounded-full  object-cover "
+              src={user.userImg}
+            />
+            <div className="flew flex-col	">
+              <h5>{user.userName}</h5>
+              <div className=" text-zinc-600">
+                <h6>{user.address}</h6>
+                <h6> {user.phone}</h6>
+                <h6> {user.email}</h6>
+              </div>
+            </div>
+            <div className=" bg-zinc-200 	rounded-lg absolute  top-80 left-5  w-[23rem]">
+              <AddPet />
+            </div>
+          </div>
         </div>
-        <Post/>
-        <PetsList />
+        <div className="bg-zinc-200 col-span-4  mt-4 mb-4	rounded-lg ">
+          <Post />
+        </div>
+
+        <div className="bg-zinc-200 col-span-2  mt-4 mb-4 rounded-lg	 ">
+          {" "}
+          <PetsList />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

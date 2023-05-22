@@ -4,6 +4,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home.jsx";
 import Profile from "./pages/Profile";
+import Admin from "./pages/Admin.jsx";
+import Visitor from "./pages/Visitor"
 
 
 function App() {
@@ -12,10 +14,12 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/admin/:id" element={<Admin />} />
+        <Route path="/visitor" element={<Visitor />} />
       </Routes>
     </div>
   );
