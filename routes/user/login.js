@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
         message: "Invalid email or password, please try again",
       });
     }
-    let testPassword = await bcrypt.compare(password, User.password);
+    let testPassword = await bcrypt.compareSync(password, User.password);
     if (!testPassword) {
       return res.status(400).json({
         status: false,

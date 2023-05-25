@@ -7,6 +7,7 @@ import Users from "../components/Users";
 import GetPost from "../components/GetPosts";
 import { Form, Button } from "semantic-ui-react";
 
+
 function Admin() {
   const [user, setUser] = useState({});
   const [newPost, setNewPost] = useState({});

@@ -1,7 +1,6 @@
 import React from "react";
 import NavBar from "../components/NavBar";
 import Visitorone from "../components/Visitorone";
-import VisitorTwo from "../components/VisitorTwo";
 
 function Visitor() {
   return (
@@ -14,8 +13,8 @@ function Visitor() {
             src="https://pioneerec.com/wp-content/uploads/2023/03/AdobeStock_195237382.jpeg"
           />
         </div>
-        <div className="grid grid-cols-8 h-screen gap-5 ">
-          <Visitorone /> <VisitorTwo />
+        <div className="h-screen ">
+          <Visitorone /> 
         </div>
       </div>
     </div>

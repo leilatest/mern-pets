@@ -6,6 +6,7 @@ import { Button, Icon, Modal, TextArea, Input } from "semantic-ui-react";
 function AddPost() {
   const [firstOpen, setFirstOpen] = React.useState(false);
   const [newPost, setNewPost] = useState({});
+  console.log(newPost);
 
   let { id } = useParams();
 

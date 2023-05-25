@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import NavBar from "../components/NavBar";
 import axios from "axios";
-
 import PetsList from "../components/PetsList";
 import Post from "../components/Post";
 import AddPet from "../components/AddPet";

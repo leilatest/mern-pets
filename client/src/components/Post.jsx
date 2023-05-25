@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import axios from "axios";
 import { Item, Button, Form, Input, TextArea } from "semantic-ui-react";
 import AddPost from "./AddPost";
+import PetsAdoption from "./PetsAdoption";
 
 function Post() {
   const [posts, setPosts] = useState([]);
@@ -11,6 +12,7 @@ function Post() {
   const [postId, setPostId] = useState("");
   const [showUpdate, setShowUpdate] = useState(false);
   const [updatePost, setUpdatePost] = useState({});
+  console.log(posts);
 
   useEffect(() => {
     axios
@@ -18,6 +20,22 @@ function Post() {
       .then((res) => setPosts(res.data.data))
       .catch((err) => console.dir(err));
   }, [posts, id]);
+  const handleChange = (e) => {
+    setUpdatePost({ ...updatePost, [e.target.name]: e.target.value });
+  };
+  const handleShow = (post_id) => {
+    setShowUpdate(!showUpdate);
+    setPostId(post_id);
+  };
+  const handleSave = (user_id) => {
+    axios
+      .put(`/api/myapp/post/updatePost/${user_id}`, updatePost)
+      .then((res) => {
+        console.log(res.data.status);
+        setShowUpdate(!showUpdate);
+      })
+      .catch((err) => console.dir(err));
+  };
 
   const handleDelete = (postId) => {
     axios
@@ -30,25 +48,13 @@ function Post() {
       })
       .catch((err) => console.dir(err));
   };
-  const handleShow = (post_id) => {
-    setShowUpdate(!showUpdate);
-    setPostId(post_id);
-  };
-  const handleChange = (e) => {
-    setUpdatePost({ ...updatePost, [e.target.name]: e.target.value });
-  };
-  const handleSave = (user_id) => {
-    axios
-      .put(`/api/myapp/post/updatePost/${user_id}`, updatePost)
-      .then((res) => {
-        console.log(res.data.status);
-        setShowUpdate(!showUpdate);
-      })
-      .catch((err) => console.dir(err));
-  };
 
   return (
-    <div className="  col-span-3    ">
+    <div className=" col-span-3    ">
+      <div>
+        <PetsAdoption/>
+    
+      </div>
       <div className="bg-gradient-to-r from-zinc-50 to-zinc-50   hover:from-zinc-50 m-2 rounded-full flex justify-center items-center h-24 mb-8  ">
         <AddPost />
       </div>

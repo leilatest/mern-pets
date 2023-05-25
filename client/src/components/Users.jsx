@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
-import { Button, Card, Image } from "semantic-ui-react";
+import { Card, Image } from "semantic-ui-react";
+import AddPet from "./AddPet";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -9,12 +10,15 @@ function Users() {
 
   useEffect(() => {
     axios
-      .get(`/api/myapp/ListUsers/${id}`)
+      .get(`/api/myapp/admin/ListUsers/${id}`)
       .then((res) => setUsers(res.data.data))
       .catch((err) => console.dir(err));
   }, [users, id]);
   return (
     <div>
+      <div>
+        <AddPet/>
+      </div>
       <Card.Group className="flex flex-col  items-center 	">
         {users.map((user) => (
           <Card className=" absolute top-3 w-screen " key={user._id}>
@@ -31,16 +35,7 @@ function Users() {
                 <Card.Meta>Phone :{user.phone}</Card.Meta>
               </div>
             </Card.Content>
-            <Card.Content extra>
-              <div className="ui two buttons">
-                <Button basic color="green">
-                  Approve
-                </Button>
-                <Button basic color="red">
-                  Decline
-                </Button>
-              </div>
-            </Card.Content>
+            
           </Card>
         ))}
       </Card.Group>

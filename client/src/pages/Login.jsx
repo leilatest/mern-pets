@@ -15,7 +15,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [errorTime, setErrorTime] = useState(false);
-
+console.log(LoginData);
   const navigate = useNavigate();
 
   const handleChange = (e) => {

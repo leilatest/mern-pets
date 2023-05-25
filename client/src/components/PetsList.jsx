@@ -5,11 +5,11 @@ import { Button, Card, Form, Image, Input } from "semantic-ui-react";
 import { ToastContainer, toast } from "react-toastify";
 
 function PetsList() {
+    let { id } = useParams();
   const [pets, setPets] = useState([]);
   const [showUpdate, setShowUpdate] = useState(false);
   const [petId, setPetId] = useState("");
   const [updatePet, setUpdatePet] = useState({});
-  let { id } = useParams();
   const [deletePet, setDeletePet] = useState(false);
 
   useEffect(() => {

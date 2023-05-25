@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import axios from "axios";
 import { Button, Accordion, Icon, Form, Message } from "semantic-ui-react";
 
-function AddPet() {
+function PetsAdoption() {
   const [newPet, setNewPet] = useState({});
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -22,7 +22,7 @@ function AddPet() {
   };
   const handleCreatePet = () => {
     axios
-      .post(`/api/myapp/addPets/${id}`, newPet)
+      .post(`/api/myapp/visitor/addpetsaddoption/${id}`, newPet)
       .then((res) => {
         if (res) {
           setSuccess(res.data.message);
@@ -31,8 +31,8 @@ function AddPet() {
           petName: "",
           breed: "",
           vaccination: "",
-          grooming: "",
-          veterinarian: "",
+          gender: "",
+          type: "",
           age: "",
           userImg: "",
         });
@@ -43,10 +43,11 @@ function AddPet() {
         }
       });
   };
+
   return (
     <Accordion>
       <Accordion.Title
-       className="text-8xl font-bold font-Glegoo "
+        className="text-8xl font-bold font-Glegoo "
         active={activeIndex === 0}
         index={0}
         onClick={handleClick}
@@ -60,7 +61,16 @@ function AddPet() {
             handleNewPet(e);
           }}
         >
-          <Form.Field className=" font-bold font-Glegoo  flex  flex-col items-center  justify-center">
+          <Form.Field className=" font-bold font-Glegoo  flex  flex-col items-center bg-slate-200 justify-center">
+            <Form.Input
+              width={15}
+              size="big"
+              label="type"
+              placeholder="pet Type"
+              name="type"
+              value={newPet.type}
+            />{" "}
+            <br />
             <Form.Input
               width={15}
               size="big"
@@ -88,20 +98,11 @@ function AddPet() {
             />{" "}
             <Form.Input
               size="big"
-              type="date"
-              label="Grooming"
-              placeholder="grooming"
-              name="grooming"
+              label="gender"
+              placeholder="gender"
+              name="gender"
               width={15}
-              value={newPet.grooming}
-            />{" "}
-            <Form.Input
-              size="big"
-              label="Veterinarian"
-              placeholder="veterinarian"
-              name="veterinarian"
-              width={15}
-              value={newPet.veterinarian}
+              value={newPet.gender}
             />{" "}
             <Form.Input
               size="big"
@@ -148,4 +149,4 @@ function AddPet() {
   );
 }
 
-export default AddPet;
+export default PetsAdoption;

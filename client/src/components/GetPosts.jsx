@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import { Item, Button } from "semantic-ui-react";
+import PetsAdoption from "./PetsAdoption";
 
 function GetPost() {
   const [posts, setPosts] = useState([]);
   let { id } = useParams();
   const [deletePost, setDeletePost] = useState(false);
-console.log(posts)
   useEffect(() => {
     axios
-      .get(`/api/myapp/ListPosts/${id}`)
+      .get(`/api/myapp/admin/ListPosts/${id}`)
       .then((res) => setPosts(res.data.data))
       .catch((err) => console.dir(err));
   }, [posts, id]);
+  console.log(posts);
 
   const handleDelete = (postId) => {
     axios
@@ -29,6 +30,9 @@ console.log(posts)
 
   return (
     <div className="    bg-white mt-2 mr-2 ml-2  ">
+      <div>
+        <PetsAdoption/>
+      </div>
       <Item.Group divided>
         {posts.map((post) => (
           <Item key={post._id}>

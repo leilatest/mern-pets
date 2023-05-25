@@ -1,8 +1,7 @@
-const pets = require("../../models/pet");
+const pets = require("../../models/adoption");
 
 module.exports = async (req, res) => {
   try {
-    let { id } = req.params;
     let Pets = await pets.find();
     res.status(200).json({ status: true, data: Pets });
   } catch (err) {

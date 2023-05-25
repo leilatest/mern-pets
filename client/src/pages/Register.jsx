@@ -15,11 +15,10 @@ function Register() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
-
+  console.log(newUser);
   const handleChange = (e) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
-
   const handleRegister = () => {
     setLoading(true);
 
